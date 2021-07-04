@@ -511,7 +511,7 @@ int main(int argc, char* argv[])
         std::cout << "Failed to set awb red gain parameter." << std::endl;
     }
     MMAL_PARAMETER_AWB_GAINS_T awb_blue_gain = {{MMAL_PARAMETER_CUSTOM_AWB_GAINS, sizeof(MMAL_PARAMETER_AWB_GAINS_T)}, getCustomAwbBlue()};
-    if(mmal_port_parameter_set_rational(camera->control, MMAL_PARAMETER_CUSTOM_AWB_GAINS, (_gain){getCustomAwbBlue(), 100}) != MMAL_SUCCESS)
+    if(mmal_port_parameter_set_rational(camera->control, MMAL_PARAMETER_CUSTOM_AWB_GAINS, (b_gain){getCustomAwbBlue(), 100}) != MMAL_SUCCESS)
     {
         std::cout << "Failed to set awb blue gain parameter." << std::endl;
 
