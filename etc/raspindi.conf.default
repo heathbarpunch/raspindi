@@ -2,7 +2,9 @@ neopixel_path = "/tmp/neopixel.state";
 camera_number = "-1";
 height="720";
 width="1280";
-fps="25";
+fps="24";
+flickeravoid:"50hz";
+mirror: "both";
 
 # awb: "auto"; // Options: auto, sunlight, cloudy, shade, tungsten, fluorescent, incadescent, flash, horizon, max, off
 # saturation: 0; // Value in range 0 - 100

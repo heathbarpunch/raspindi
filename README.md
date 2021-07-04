@@ -21,7 +21,7 @@ All steps are performed on the command line.
 
 ### tl;dr
 
-- `git clone https://github.com/raspberry-pi-camera/raspindi.git && cd raspindi`
+- `git clone https://github.com/heathbarpunch/raspindi.git && cd raspindi`
 - `./easy-setup.sh`
 - `/opt/raspindi/raspindi.sh`
 
@@ -37,7 +37,15 @@ sudo apt install git
 Clone this repository and `cd` into it.
 
 ```
+git clone https://github.com/heathbarpunch/raspindi.git && cd raspindi
+
+```
+
+(use the following for v2.0.1):
+
+```
 git clone https://github.com/raspberry-pi-camera/raspindi.git && cd raspindi
+
 ```
 
 Install compilation dependencies.
@@ -79,8 +87,13 @@ Raspberry Pi camera after a few seconds.
 [OBS-NDI plugin](https://github.com/Palakis/obs-ndi/releases/) 
 works well.
 
+Note: I'm currently experiencing continuously increasing latency using the OBS-NDI plugin. and recommend using Studio Monitor with OBS window capture instead - heathbarpunch
+
 
 # Changelog
+
+## v2.0.2
+Exposed flickeravoid. Preparing to expose AWB Gain settings, changed url in readme for ease of upload.
 
 ## v2.0.1
 Added config parameters for various camera settings (AWB, exposure etc.)
