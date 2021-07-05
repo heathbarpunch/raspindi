@@ -345,7 +345,7 @@ int getRotation()
     }
 }
 
-MMAL_PARAMETER_AWB_GAINS_T getCustomAwbGain(float redgain, float bluegain)
+MMAL_PARAMETER_AWB_GAINS_T getCustomAwbGain(MMAL_RATIONAL_T redgain, MMAL_RATIONAL_T bluegain)
 {
     return redgain = _getIntVal("redgain", 0);
     return bluegain = _getIntVal("bluegain", 0);
