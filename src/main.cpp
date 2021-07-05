@@ -513,7 +513,7 @@ int main(int argc, char* argv[])
         std::cout << "Failed to set exposure parameter." << std::endl;
     }
 
-    MMAL_PARAMETER_AWB_GAINS_T awbGain = {{MMAL_PARAMETER_CUSTOM_AWB_GAINS,sizeof(awbGain)}, getCustomAwbGain()};
+    MMAL_PARAMETER_AWB_GAINS_T awbGain = {{MMAL_PARAMETER_CUSTOM_AWB_GAINS,sizeof(awbGain)}, getCustomAwbGain(awbGain.r_gain, awbGain.b_gain)};
     if (mmal_port_parameter_set(camera->control, &awbGain.hdr) != MMAL_SUCCESS)
         {
         std::cout << "Failed to set awb gain parameter." << std::endl;
