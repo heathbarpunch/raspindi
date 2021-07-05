@@ -345,7 +345,7 @@ int getRotation()
     }
 }
 
-int getCustomAwbRedGain()
+uint32 getCustomAwbRedGain()
 {
     try
     {
@@ -367,7 +367,7 @@ int getCustomAwbRedGain()
         getCustomAwbGain.r_gain = 0;
     }
 }
-int getCustomAwbBlueGain()
+uint32 getCustomAwbBlueGain()
 {
     try
     {
