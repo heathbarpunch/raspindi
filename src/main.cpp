@@ -345,10 +345,43 @@ int getRotation()
     }
 }
 
-MMAL_PARAMETER_AWB_GAINS_T getCustomAwbGain(int redgain, int bluegain)
+MMAL_PARAMETER_AWB_GAINS_T getCustomAwbGain()
 {
-    return redgain = _getIntVal("redgain", 0);
-    return bluegain = _getIntVal("bluegain", 0);
+    try
+    {
+        std::string redValue = cfg.lookup("red_gain");
+        std::string blueValue = cfg.lookup("blue_gain");
+        if (redValue > 100)
+        {
+            std::cerr << "Invalid value for " << "red_gain" << ": " << redValue << std::endl;
+            return 100;
+        }
+        if (redValue < 0)
+        {
+            std::cerr << "Invalid value for " << "red_gain" << ": " << redValue << std::endl;
+            return 0;
+        }
+        if (blueValue > 100)
+        {
+            std::cerr << "Invalid value for " << "blue_gain" << ": " << blueValue << std::endl;
+            return 100;
+        }
+        if (blueValue < 0)
+        {
+             std::cerr << "Invalid value for " << "blue_gain" << ": " << blueValue << std::endl;
+            return 0;
+        }
+        getCustomAwbGain.r_gain = redValue;
+        getCustomAwbGain.b_gain = blueValue;
+    
+    }
+    catch(libconfig::SettingNotFoundException)
+    {
+        getCustomAwbGain.r_gain = 0;
+        getCustomAwbGain.b_gain = 0;
+
+    }
+
 }
 /* int getCustomAwbRed()
 {
@@ -513,9 +546,9 @@ int main(int argc, char* argv[])
         std::cout << "Failed to set exposure parameter." << std::endl;
     }
 
-    MMAL_PARAMETER_AWB_GAINS_T awbGain = {{MMAL_PARAMETER_CUSTOM_AWB_GAINS,sizeof(awbGain)}, getCustomAwbGain(awbGain.r_gain, awbGain.b_gain)};
+    MMAL_PARAMETER_AWB_GAINS_T awbGain = {{MMAL_PARAMETER_CUSTOM_AWB_GAINS,sizeof(MMAL_PARAMETER_AWB_GAINS_T)}, getCustomAwbGain()};
     if (mmal_port_parameter_set(camera->control, &awbGain.hdr) != MMAL_SUCCESS)
-        {
+        { 
         std::cout << "Failed to set awb gain parameter." << std::endl;
     }
     
