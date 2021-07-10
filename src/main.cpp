@@ -345,51 +345,6 @@ int getRotation()
     }
 }
 
-uint32_t getCustomAwbRedGain()
-{
-    try
-    {
-        std::string redValue = cfg.lookup("red_gain");
-        if (redValue > 100)
-        {
-            std::cerr << "Invalid value for " << "red_gain" << ": " << redValue << std::endl;
-            return 100;
-        }
-        if (redValue < 0)
-        {
-            std::cerr << "Invalid value for " << "red_gain" << ": " << redValue << std::endl;
-            return 0;
-        }
-        return redValue;
-    }
-    catch(libconfig::SettingNotFoundException)
-    {
-        getCustomAwbGain.r_gain = 0;
-    }
-}
-uint32_t getCustomAwbBlueGain()
-{
-    try
-    {
-        std::string blueValue = cfg.lookup("blue_gain");
-        if (blueValue > 100)
-        {
-            std::cerr << "Invalid value for " << "blue_gain" << ": " << blueValue << std::endl;
-            return 100;
-        }
-        if (blueValue < 0)
-        {
-             std::cerr << "Invalid value for " << "blue_gain" << ": " << blueValue << std::endl;
-            return 0;
-        }
-        return blueValue;
-    }
-    catch(libconfig::SettingNotFoundException)
-    {
-        getCustomAwbGain.b_gain = 0;
-
-    }
-}
 
 int main(int argc, char* argv[])
 {
@@ -542,20 +497,6 @@ int main(int argc, char* argv[])
     if(mmal_port_parameter_set(camera->control, &exp_mode.hdr) != MMAL_SUCCESS)
     {
         std::cout << "Failed to set exposure parameter." << std::endl;
-    }
-
-    MMAL_PARAMETER_AWB_GAINS_T awbGain = {MMAL_PARAMETER_CUSTOM_AWB_GAINS,sizeof(MMAL_PARAMETER_AWB_GAINS_T)};
-    if(mmal_port_parameter_set(camera->control, &awbGain.hdr) != MMAL_SUCCESS)
-    {
-        std::cout << "Failed to set awb gain parameter." << std::endl;
-    }
-    if(mmal_port_parameter_set_rational(camera->control, awbGain.r_gain, (MMAL_RATIONAL_T){getCustomAwbRedGain(), 100}) != MMAL_SUCCESS)
-    { 
-        std::cout << "Failed to set awb red gain parameter." << std::endl;
-    }
-    if(mmal_port_parameter_set_rational(camera->control, awbGain.b_gain, (MMAL_RATIONAL_T){getCustomAwbBlueGain(), 100}) != MMAL_SUCCESS)
-    { 
-        std::cout << "Failed to set awb blue gain parameter." << std::endl;
     }
     
     MMAL_PARAMETER_EXPOSUREMETERINGMODE_T meter_mode = {{MMAL_PARAMETER_EXP_METERING_MODE, sizeof(MMAL_PARAMETER_EXPOSUREMETERINGMODE_T)}, getMeteringMode()};
