@@ -509,23 +509,26 @@ int main(int argc, char* argv[])
     mmal_port_parameter_set_int32(camera->output[0], MMAL_PARAMETER_ROTATION, rotation);
     mmal_port_parameter_set_int32(camera->output[1], MMAL_PARAMETER_ROTATION, rotation);
     mmal_port_parameter_set_int32(camera->output[2], MMAL_PARAMETER_ROTATION, rotation);
+    mmal_port_parameter_set_int32(camera->output[3], MMAL_PARAMETER_ROTATION, rotation);
 
     MMAL_PARAMETER_MIRROR_T mirror = {{MMAL_PARAMETER_MIRROR, sizeof(MMAL_PARAMETER_MIRROR_T)}, getMirror()};
 
     if (    mmal_port_parameter_set(camera->output[0], &mirror.hdr) != MMAL_SUCCESS ||
             mmal_port_parameter_set(camera->output[1], &mirror.hdr) != MMAL_SUCCESS ||
-            mmal_port_parameter_set(camera->output[2], &mirror.hdr))
+            mmal_port_parameter_set(camera->output[2], &mirror.hdr) != MMAL_SUCCESS ||
+            mmal_port_parameter_set(camera->output[3], &mirror.hdr))
     {
         std::cout << "Failed to set flip parameter." << std::endl;
     }
 
-   // MMAL_PARAMETER_FLICKERAVOID_T flickeravoid = {{MMAL_PARAMETER_FLICKER_AVOID, sizeof(MMAL_PARAMETER_FLICKERAVOID_T)}, getFlickerAvoidMode()};
-   /* if (    mmal_port_parameter_set(camera->output[0], &flickeravoid.hdr) != MMAL_SUCCESS ||
+   MMAL_PARAMETER_FLICKERAVOID_T flickeravoid = {{MMAL_PARAMETER_FLICKER_AVOID, sizeof(MMAL_PARAMETER_FLICKERAVOID_T)}, getFlickerAvoidMode()};
+   if (     mmal_port_parameter_set(camera->output[0], &flickeravoid.hdr) != MMAL_SUCCESS ||
             mmal_port_parameter_set(camera->output[1], &flickeravoid.hdr) != MMAL_SUCCESS ||
-            mmal_port_parameter_set(camera->output[2], &flickeravoid.hdr))
+            mmal_port_parameter_set(camera->output[2], &flickeravoid.hdr) != MMAL_SUCCESS ||
+            mmal_port_parameter_set(camera->output[3], &flickeravoid.hdr))
     {
         std::cout << "Failed to set flicker avoid parameter." << std::endl;
-    }*/
+    }
     
 
     // Start Capture

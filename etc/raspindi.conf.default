@@ -3,10 +3,8 @@ camera_number = "-1";
 height="720";
 width="1280";
 fps="24";
-flickeravoid:"50hz";
+flickeravoid:"60hz";
 mirror: "both";
-awb_red_gain: 1;
-awb_blue_gain: 1;
 
 # awb: "auto"; // Options: auto, sunlight, cloudy, shade, tungsten, fluorescent, incadescent, flash, horizon, max, off
 # awb_red_gain: 0; // value in range 0 - 100
