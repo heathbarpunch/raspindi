@@ -472,7 +472,7 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
-    MMAL_PARAMETER_AWBMODE_T awbParam = {{MMAL_PARAMETER_AWB_MODE,sizeof(MMAL_PARAMETER_AWBMODE_T)}};
+    MMAL_PARAMETER_AWBMODE_T awbParam = {{MMAL_PARAMETER_AWB_MODE,sizeof(MMAL_PARAMETER_AWBMODE_T)}, getAwbMode()};
     if(mmal_port_parameter_set(camera->control, &awbParam.hdr) != MMAL_SUCCESS)
     {
         std::cout << "Failed to set awb parameter." << std::endl;
