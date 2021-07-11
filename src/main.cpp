@@ -525,7 +525,7 @@ int main(int argc, char* argv[])
    if (     mmal_port_parameter_set(camera->output[0], &flickeravoid.hdr) != MMAL_SUCCESS ||
             mmal_port_parameter_set(camera->output[1], &flickeravoid.hdr) != MMAL_SUCCESS ||
             /*mmal_port_parameter_set(camera->output[2], &flickeravoid.hdr) != MMAL_SUCCESS ||*/
-            mmal_port_parameter_set(camera->output[2, &flickeravoid.hdr))
+            mmal_port_parameter_set(camera->output[2], &flickeravoid.hdr))
     {
         std::cout << "Failed to set flicker avoid parameter." << std::endl;
     }
